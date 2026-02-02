@@ -17,4 +17,4 @@ requests==2.31.0
 
 # Utility
 python-dotenv==1.0.0
-Pillow==10.1.0
+Pillow==10.3.0
