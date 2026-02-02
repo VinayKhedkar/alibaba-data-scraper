@@ -95,11 +95,15 @@ def parse_supplier_data(html_content: str) -> List[Dict]:
     
     for element in supplier_elements[:30]:  # Limit to top 30 results
         try:
+            name_elem = element.select_one('.supplier-name')
+            years_elem = element.select_one('.years-in-business')
+            rate_elem = element.select_one('.response-rate')
+            
             supplier_data = {
-                'name': element.select_one('.supplier-name')?.text.strip() or 'N/A',
+                'name': name_elem.text.strip() if name_elem else 'N/A',
                 'verified': bool(element.select_one('.verified-icon')),
-                'years_in_business': element.select_one('.years-in-business')?.text.strip() or 'N/A',
-                'response_rate': element.select_one('.response-rate')?.text.strip() or '0',
+                'years_in_business': years_elem.text.strip() if years_elem else 'N/A',
+                'response_rate': rate_elem.text.strip() if rate_elem else '0',
             }
             suppliers.append(supplier_data)
         except Exception as e:
