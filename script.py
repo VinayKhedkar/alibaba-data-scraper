@@ -97,32 +97,42 @@ def alibaba_image_search(image_path: str):
                                 try:
                                     gy_elem = None
                                     try:
-                                        gy_elem = card.ele('[data-supplier-card-gold-years="true"] .WDsPi')
+                                        gy_elem = card.ele(
+                                            '[data-supplier-card-gold-years="true"] .WDsPi'
+                                        )
                                     except Exception:
                                         gy_elem = None
 
                                     if not gy_elem:
                                         # fallback to any .WDsPi element if present
-                                        gy_elem = card.ele('.WDsPi')
+                                        gy_elem = card.ele(".WDsPi")
 
                                     if gy_elem:
                                         attr_val = None
                                         # try attribute on the found element
                                         try:
-                                            attr_val = gy_elem.attr('data-supplier-card-gold-years')
+                                            attr_val = gy_elem.attr(
+                                                "data-supplier-card-gold-years"
+                                            )
                                         except Exception:
                                             try:
-                                                attr_val = gy_elem.get_attribute('data-supplier-card-gold-years')
+                                                attr_val = gy_elem.get_attribute(
+                                                    "data-supplier-card-gold-years"
+                                                )
                                             except Exception:
                                                 attr_val = None
 
                                         # if not present on element, check the card container
                                         if not attr_val:
                                             try:
-                                                attr_val = card.attr('data-supplier-card-gold-years')
+                                                attr_val = card.attr(
+                                                    "data-supplier-card-gold-years"
+                                                )
                                             except Exception:
                                                 try:
-                                                    attr_val = card.get_attribute('data-supplier-card-gold-years')
+                                                    attr_val = card.get_attribute(
+                                                        "data-supplier-card-gold-years"
+                                                    )
                                                 except Exception:
                                                     attr_val = None
 
